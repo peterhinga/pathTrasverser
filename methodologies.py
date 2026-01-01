@@ -44,7 +44,7 @@ def unicode_encoding(link, payload):
 
         # make request using the unicode payload
         ureq = req.get(f"{link}{final_payload}")
-
+        print(f"Payload:{final_payload}{dots} status{ureq.status_code}")
 
     else: # remeber to deal with the \ bcoz of python intepreter
         replacements = str.maketrans({
@@ -52,3 +52,5 @@ def unicode_encoding(link, payload):
             "\\": uCode["back_slash"]
         })
         final_payload = payload.translate(replacements)
+        ureq = req.get(f"{link}{final_payload}")
+        print(f"Payload:{final_payload}{dots} status{ureq.status_code}")
